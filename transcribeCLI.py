@@ -9,17 +9,13 @@ import subprocess
 # create a python function that returns files in a directory
 def get_files(directory):
     """get files in a directory"""
-    files = []
-    for file in os.listdir(directory):
-        files.append(file)
-    return files
+    return list(os.listdir(directory))
 
 
 # find the size of all the files in a directory using subprocess and ls -lah
 def get_size(directory):
     """get size of files in a directory"""
-    filesize = subprocess.check_output(["ls", "-lah", directory])
-    return filesize
+    return subprocess.check_output(["ls", "-lah", directory])
 
 
 # transcribe multiple files in a directory

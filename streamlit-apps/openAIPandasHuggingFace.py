@@ -22,7 +22,7 @@ def submit_question(text):
 
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    result = openai.Completion.create(
+    return openai.Completion.create(
         prompt=text,
         temperature=0,
         max_tokens=300,
@@ -31,19 +31,16 @@ def submit_question(text):
         presence_penalty=0,
         model="text-davinci-002",
     )["choices"][0]["text"].strip(" \n")
-    return result
 
 
 def squad_dataset():
-    dataset = load_dataset("squad")
-    return dataset
+    return load_dataset("squad")
 
 @st.cache
 def load_data(row):
     dataset = squad_dataset()
     payload = squad_dataset()['train'][row]['context']
-    open_ai_result = submit_question(payload)
-    return open_ai_result
+    return submit_question(payload)
 
 data_load_state = st.text('Loading data and giving to openai...')
 data = load_data(0)

@@ -16,7 +16,7 @@ def submit_question(text):
     openai.api_key = os.getenv("OPENAI_API_KEY")
     prompt = text
 
-    result = openai.Completion.create(
+    return openai.Completion.create(
         prompt=prompt,
         temperature=0,
         max_tokens=300,
@@ -25,7 +25,6 @@ def submit_question(text):
         presence_penalty=0,
         model="text-davinci-002",
     )["choices"][0]["text"].strip(" \n")
-    return result
 
 
 # build a function that converts a comment into code in any language
@@ -41,7 +40,7 @@ def create_code(text, language):
     openai.api_key = os.getenv("OPENAI_API_KEY")
     prompt = f"## {language}\n\n{text}"
 
-    result = openai.Completion.create(
+    return openai.Completion.create(
         prompt=prompt,
         temperature=0,
         max_tokens=300,
@@ -50,4 +49,3 @@ def create_code(text, language):
         presence_penalty=0,
         model="davinci-codex",
     )["choices"][0]["text"].strip(" \n")
-    return result

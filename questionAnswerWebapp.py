@@ -21,7 +21,7 @@ def submit_question(question):
     # Setting the OpenAI API key got from the OpenAI dashboard
     openai.api_key = api_key
 
-    result = openai.Completion.create(
+    return openai.Completion.create(
         prompt=question,
         temperature=0,
         max_tokens=300,
@@ -30,7 +30,6 @@ def submit_question(question):
         presence_penalty=0,
         model="text-davinci-002",
     )["choices"][0]["text"].strip(" \n")
-    return result
 
 
 if st.button("Submit"):

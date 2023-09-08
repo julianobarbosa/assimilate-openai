@@ -12,7 +12,7 @@ def submit_question(text):
 
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-    result = openai.Completion.create(
+    return openai.Completion.create(
         prompt=text,
         temperature=0,
         max_tokens=300,
@@ -21,12 +21,10 @@ def submit_question(text):
         presence_penalty=0,
         model="text-davinci-002",
     )["choices"][0]["text"].strip(" \n")
-    return result
 
 
 def squad_dataset():
-    dataset = load_dataset("squad")
-    return dataset
+    return load_dataset("squad")
 
 def show_before_after(text):
     print(f"Question: {text}\n\n")

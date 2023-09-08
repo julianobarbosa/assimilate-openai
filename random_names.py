@@ -60,7 +60,7 @@ last_names = [
 
 full_names = []
 
-for i in range(5):
+for _ in range(5):
     first = random.choice(first_names)
     last = random.choice(last_names)
     full_names.append(f"{first} {last}")
